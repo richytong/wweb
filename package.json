@@ -1,0 +1,12 @@
+{
+  "name": "wweb",
+  "version": "0.1.0",
+  "description": "Simple, isomorphic interface around common Web APIs",
+  "author": "Richard Tong",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "github:richytong/wweb"
+  }
+}
