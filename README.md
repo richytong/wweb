@@ -70,6 +70,10 @@ wweb.cookies.set('foo', 'bar')
 console.log(window.document.cookie)
 // => 'foo=bar; baz=qux'
 
+wweb.cookies.update('quux', 'quuz')
+console.log(window.document.cookie)
+// => 'quux=quuz'
+
 wweb.cookies.clear()
 console.log(window.document.cookie)
 // => ''
