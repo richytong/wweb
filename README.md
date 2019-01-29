@@ -33,7 +33,6 @@ console.log(window.location.search)
 const myQueryParam = wweb.search.get('foo')
 // => 'bar'
 
-// gets entire search query as an object
 const search = wweb.search.getAll()
 // => { foo: 'bar' }
 
@@ -46,7 +45,6 @@ wweb.search.set('baz', 'qux')
 console.log(window.location.search)
 // => '?foo=bar&baz=qux'
 
-// clears entire search query
 wweb.search.clear()
 console.log(window.location.search)
 // => ''
