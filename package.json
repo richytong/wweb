@@ -8,5 +8,8 @@
   "repository": {
     "type": "git",
     "url": "github:richytong/wweb"
+  },
+  "dependencies": {
+    "query-string": "^6.2.0"
   }
 }
