@@ -45,6 +45,10 @@ wweb.search.set('baz', 'qux')
 console.log(window.location.search)
 // => '?foo=bar&baz=qux'
 
+wweb.search.update('quux', 'quuz')
+console.log(window.location.search)
+// => '?quux=quuz'
+
 wweb.search.clear()
 console.log(window.location.search)
 // => ''

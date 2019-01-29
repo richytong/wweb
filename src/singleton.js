@@ -1,7 +1,7 @@
 const genCache = () => {
   let store = {}
   return {
-    init: (obj) => { store = { ...obj } },
+    wrt: (obj) => { store = { ...obj } },
     get: name => store[name] || null,
     gta: () => ({ ...store }),
     set: (name, val) => { store[name] = val },
@@ -16,7 +16,7 @@ const init = (config) => {
   if (typeof config.query !== 'object') {
     throw new TypeError('config.query needs to be an object')
   }
-  serverSearch.init(config.query)
+  serverSearch.wrt(config.query)
 }
 
 module.exports = {

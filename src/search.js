@@ -1,15 +1,6 @@
 const queryString = require('query-string')
 const { serverSearch } = require('./singleton')
-
-const cleanHash = (hash) => {
-  const dirtyHashPos = hash.indexOf('?')
-  if (dirtyHashPos > -1) return hash.slice(0, dirtyHashPos)
-  return hash
-}
-
-const fmtQS = qs => qs ? `?${qs}` : ''
-
-const genRelUrl = (pathname, qs, hash) => `${pathname}${fmtQS(qs)}${cleanHash(hash)}`
+const { genRelUrl } = require('./url')
 
 const get = (name) => {
   if (!name) return null
@@ -33,6 +24,20 @@ const set = (name, value) => {
   }
   const searchObj = queryString.parse(window.location.search)
   searchObj[name] = value
+  const relUrl = genRelUrl(
+    window.location.pathname,
+    queryString.stringify(searchObj),
+    window.location.hash,
+  )
+  window.history.pushState({}, '', relUrl)
+}
+
+const update = (searchObj) => {
+  if (!qs) return
+  if (typeof window !== 'object') {
+    serverSearch.wrt(obj)
+    return
+  }
   const relUrl = genRelUrl(
     window.location.pathname,
     queryString.stringify(searchObj),
@@ -76,6 +81,7 @@ module.exports = {
   get,
   getAll,
   set,
+  update,
   remove,
   clear,
 }
