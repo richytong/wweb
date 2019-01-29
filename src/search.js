@@ -1,3 +1,4 @@
+const queryString = require('query-string')
 const { serverSearch } = require('./singleton')
 
 const cleanHash = (hash) => {
@@ -6,7 +7,9 @@ const cleanHash = (hash) => {
   return hash
 }
 
-const genRelUrl = (pathname, qs, hash) => `${pathname}?${qs}${cleanHash(hash)}`
+const fmtQS = qs => qs ? `?${qs}` : ''
+
+const genRelUrl = (pathname, qs, hash) => `${pathname}${fmtQS(qs)}${cleanHash(hash)}`
 
 const get = (name) => {
   if (!name) return null
