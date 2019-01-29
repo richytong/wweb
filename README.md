@@ -1,5 +1,5 @@
 # wweb
-Simple, isomorphic interface around common Web APIs. Perfect for intuitively interacting with your browser. Tired of checking for `window`? This may interest you.
+Simple, isomorphic interface around common Web APIs. Perfect for intuitively interacting with your browser. Tired of using `window`? Don't know/care if you're in SERVER or BROWSER? This may interest you.
 
 # Installation
 ```bash
@@ -14,7 +14,10 @@ const wweb = require('wweb')
 const app = yourWebAppFrameworkHere()
 
 app.get('/*', (req, res) => {
-  wweb.init(req) // parse cookies, search query params, and more from SSR
+  wweb.init({
+    query: req.query, // query object made from parsed query string
+    cookies: req.cookies, // cookies object made from parsed Cookies header <- you'll need middleware if you use express
+  })
   // ...
 })
 
@@ -25,28 +28,30 @@ const wweb = require('wweb')
 wweb.redirect('https://myawesomewebsite.com')
 
 // gets the current page from query params ?my_query_param=something
-const myQueryParam = wweb.getSearchQueryParam('my_query_param')
+const myQueryParam = wweb.search.get('my_query_param')
 
 // gets entire search query as an object
-const searchQuery = wweb.getSearchQuery()
+const search = wweb.search.getAll()
 
 // removes my_query_param from the query params
-wweb.clearSearchQueryParam('my_query_param')
+wweb.search.remove('my_query_param')
 
 // clears entire search query
-wweb.clearSearchQuery()
+wweb.search.removeAll()
+wweb.search.clear()
 
 // gets my_cookie from the document cookies
-const myCookie = wweb.getCookie('my_cookie')
+const myCookie = wweb.cookies.get('my_cookie')
 
 // gets all cookies from document
-const cookies = wweb.getCookies()
+const cookies = wweb.cookies.getAll()
 
-// clears my_cookie from the document cookies
-wweb.clearCookie('my_cookie')
+// removes my_cookie from the document cookies
+wweb.cookies.remove('my_cookie')
 
 // clears all cookies from document
-wweb.clearCookies()
+wweb.cookies.removeAll()
+wweb.cookies.clear()
 ```
 
 # License/Author
