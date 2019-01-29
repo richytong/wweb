@@ -24,26 +24,20 @@ const set = (name, value) => {
   }
   const searchObj = queryString.parse(window.location.search)
   searchObj[name] = value
-  const relUrl = genRelUrl(
-    window.location.pathname,
-    queryString.stringify(searchObj),
-    window.location.hash,
-  )
-  window.history.pushState({}, '', relUrl)
+  const { pathname, hash } = window.location
+  const relUrl = genRelUrl(pathname, queryString.stringify(searchObj), hash)
+  window.history.pushState({ pathname, hash, search: searchObj }, '', relUrl)
 }
 
 const update = (searchObj) => {
-  if (!qs) return
+  if (!searchObj) return
   if (typeof window !== 'object') {
     serverSearch.wrt(obj)
     return
   }
-  const relUrl = genRelUrl(
-    window.location.pathname,
-    queryString.stringify(searchObj),
-    window.location.hash,
-  )
-  window.history.pushState({}, '', relUrl)
+  const { pathname, hash } = window.location
+  const relUrl = genRelUrl(pathname, queryString.stringify(searchObj), hash)
+  window.history.pushState({ pathname, hash, search: searchObj }, '', relUrl)
 }
 
 const remove = (name) => {
@@ -55,12 +49,9 @@ const remove = (name) => {
   if (!window.location.search) return
   const searchObj = queryString.parse(window.location.search)
   delete searchObj[name]
-  const relUrl = genRelUrl(
-    window.location.pathname,
-    queryString.stringify(searchObj),
-    window.location.hash,
-  )
-  window.history.pushState({}, '', relUrl)
+  const { pathname, hash } = window.location
+  const relUrl = genRelUrl(pathname, queryString.stringify(searchObj), hash)
+  window.history.pushState({ pathname, hash, search: searchObj }, '', relUrl)
 }
 
 const clear = () => {
@@ -69,12 +60,9 @@ const clear = () => {
     return
   }
   if (!window.location.search) return
-  const relUrl = genRelUrl(
-    window.location.pathname,
-    '',
-    window.location.hash,
-  )
-  window.history.pushState({}, '', relUrl)
+  const { pathname, hash } = window.location
+  const relUrl = genRelUrl(pathname, '', hash)
+  window.history.pushState({ pathname, hash, search: {} }, '', relUrl)
 }
 
 module.exports = {
