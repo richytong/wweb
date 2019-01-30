@@ -17,7 +17,7 @@ const getAll = () => {
   return cookie.parse(window.document.cookie)
 }
 
-const set = (name, value, opts) => {
+const set = (name, value, opts = {}) => {
   if (!name || !isDef(value)) return
   if (typeof window !== 'object') {
     serverCookie.set(name, value)
