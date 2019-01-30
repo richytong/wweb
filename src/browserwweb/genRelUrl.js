@@ -8,6 +8,4 @@ const fmtQS = qs => (qs ? `?${qs}` : '')
 
 const genRelUrl = (pathname, qs, hash) => `${pathname}${fmtQS(qs)}${cleanHash(hash)}`
 
-module.exports = {
-  genRelUrl,
-}
+module.exports = genRelUrl
