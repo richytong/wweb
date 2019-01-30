@@ -1,17 +1,17 @@
 const genCache = () => {
   let store = {}
   return {
-    wrt: (obj) => { store = { ...obj } },
     get: name => store[name] || null,
-    gta: () => ({ ...store }),
+    getAll: () => ({ ...store }),
     set: (name, val) => { store[name] = val },
-    del: (name) => { delete store[name] },
-    clr: () => { store = {} },
+    update: (obj) => { store = { ...obj } },
+    remove: (name) => { delete store[name] },
+    clear: () => { store = {} },
   }
 }
 
-const serverSearch = genCache()
-const serverCookie = genCache()
+const search = genCache()
+const cookie = genCache()
 
 const init = (config) => {
   if (typeof config.query !== 'object') {
@@ -20,12 +20,13 @@ const init = (config) => {
   if (typeof config.cookie !== 'object') {
     throw new TypeError('config.cookie needs to be an object')
   }
-  serverSearch.wrt(config.query)
-  serverCookie.wrt(config.cookie)
+  serverSearch.update(config.query)
+  serverCookie.update(config.cookie)
 }
 
 module.exports = {
   init,
-  serverSearch,
-  serverCookie,
+  redirect: () => {},
+  search,
+  cookie,
 }

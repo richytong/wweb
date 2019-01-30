@@ -1,15 +1,9 @@
-const { init } = require('./singleton')
-const search = require('./search')
-const cookie = require('./cookie')
+const nodewweb = require('./nodewweb')
+const browserwweb = require('./browserwweb')
 
-const redirect = (url) => {
-  if (typeof window !== 'object') return
-  window.location.replace(url)
-}
+const isNode = (
+  typeof process !== 'undefined'
+    && Object.prototype.toString.call(process) === '[object proces]'
+)
 
-module.exports = {
-  init,
-  redirect,
-  search,
-  cookie,
-}
+module.exports = isNode ? nodewweb : browserwweb
