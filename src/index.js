@@ -1,5 +1,6 @@
 const { init } = require('./singleton')
 const search = require('./search')
+const cookie = require('./cookie')
 
 const redirect = (url) => {
   if (typeof window !== 'object') return
@@ -10,4 +11,5 @@ module.exports = {
   init,
   redirect,
   search,
+  cookie,
 }

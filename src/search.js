@@ -2,6 +2,14 @@ const queryString = require('query-string')
 const { serverSearch } = require('./singleton')
 const { genRelUrl } = require('./url')
 
+const isDef = v => typeof v !== 'undefined' && v !== null
+
+const _updateWindowQueryStringFromSearchObj = (searchObj) => {
+  const { pathname, hash } = window.location
+  const relUrl = genRelUrl(pathname, queryString.stringify(searchObj), hash)
+  window.history.pushState({ pathname, hash, search: searchObj }, '', relUrl)
+}
+
 const get = (name) => {
   if (!name) return null
   if (typeof window !== 'object') return serverSearch.get(name)
@@ -17,27 +25,23 @@ const getAll = () => {
 }
 
 const set = (name, value) => {
-  if (!name || !value) return
+  if (!name || !isDef(value)) return
   if (typeof window !== 'object') {
     serverSearch.set(name, value)
     return
   }
   const searchObj = queryString.parse(window.location.search)
   searchObj[name] = value
-  const { pathname, hash } = window.location
-  const relUrl = genRelUrl(pathname, queryString.stringify(searchObj), hash)
-  window.history.pushState({ pathname, hash, search: searchObj }, '', relUrl)
+  _updateWindowQueryStringFromSearchObj(searchObj)
 }
 
 const update = (searchObj) => {
   if (!searchObj) return
   if (typeof window !== 'object') {
-    serverSearch.wrt(obj)
+    serverSearch.wrt(searchObj)
     return
   }
-  const { pathname, hash } = window.location
-  const relUrl = genRelUrl(pathname, queryString.stringify(searchObj), hash)
-  window.history.pushState({ pathname, hash, search: searchObj }, '', relUrl)
+  _updateWindowQueryStringFromSearchObj(searchObj)
 }
 
 const remove = (name) => {
@@ -49,9 +53,7 @@ const remove = (name) => {
   if (!window.location.search) return
   const searchObj = queryString.parse(window.location.search)
   delete searchObj[name]
-  const { pathname, hash } = window.location
-  const relUrl = genRelUrl(pathname, queryString.stringify(searchObj), hash)
-  window.history.pushState({ pathname, hash, search: searchObj }, '', relUrl)
+  _updateWindowQueryStringFromSearchObj(searchObj)
 }
 
 const clear = () => {
@@ -60,9 +62,7 @@ const clear = () => {
     return
   }
   if (!window.location.search) return
-  const { pathname, hash } = window.location
-  const relUrl = genRelUrl(pathname, '', hash)
-  window.history.pushState({ pathname, hash, search: {} }, '', relUrl)
+  _updateWindowQueryStringFromSearchObj({})
 }
 
 module.exports = {

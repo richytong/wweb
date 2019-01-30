@@ -11,15 +11,21 @@ const genCache = () => {
 }
 
 const serverSearch = genCache()
+const serverCookie = genCache()
 
 const init = (config) => {
   if (typeof config.query !== 'object') {
     throw new TypeError('config.query needs to be an object')
   }
+  if (typeof config.cookie !== 'object') {
+    throw new TypeError('config.cookie needs to be an object')
+  }
   serverSearch.wrt(config.query)
+  serverCookie.wrt(config.cookie)
 }
 
 module.exports = {
   init,
   serverSearch,
+  serverCookie,
 }
