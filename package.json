@@ -23,9 +23,6 @@
     "localStorage",
     "ssr",
     "universal",
-    "isomorphic",
-    "web",
-    "api",
-    "webapp"
+    "isomorphic"
   ]
 }
