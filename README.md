@@ -20,8 +20,9 @@ app.get('/*', (req, res) => {
   // so it knows query params and cookies during SSR
   wweb.init({
     search: req.query, // query object made from parsed query string
-    cookie: req.cookies, // cookies object made from parsed Cookies header <- you'll need middleware if you use express
-    // ^ express does not parse these automatically for you so you need some middleware like cookie-parser
+    cookie: req.cookies, // cookies object made from the Cookies header
+    // ^ express does not parse these automatically for you
+    //   so you need some middleware like cookie-parser
   })
   // ...
 })
@@ -104,7 +105,7 @@ console.log({ ...window.localStorage })
 ```
 
 # API
-<h1>wweb.redirect(url)</h1>
+<h2>wweb.redirect(url)</h2>
 Redirects you to url. Same thing as using window.location = url
 
 Example:
@@ -112,7 +113,7 @@ Example:
 wweb.redirect('https://example.com')
 ```
 
-<h1>wweb.search.get(name)</h1>
+<h2>wweb.search.get(name)</h2>
 Gets a search parameter by name from the search query in the browser or req.query in the server. Returns null if parameter not found
 
 Example:
@@ -120,7 +121,7 @@ Example:
 const foo = wweb.search.get('foo')
 ```
 
-<h1>wweb.search.getAll(name)</h1>
+<h2>wweb.search.getAll(name)</h2>
 Gets all search parameters in the form of an object.
 
 Example:
@@ -128,7 +129,7 @@ Example:
 const searchObj = wweb.search.getAll()
 ```
 
-<h1>wweb.search.set(name, value)</h1>
+<h2>wweb.search.set(name, value)</h2>
 Adds or updates a search parameter 
 
 Example:
@@ -136,7 +137,7 @@ Example:
 wweb.search.set('foo', 'bar')
 ```
 
-<h1>wweb.search.update(obj)</h1>
+<h2>wweb.search.update(obj)</h2>
 Updates entire search to represent obj
 
 Example:
@@ -144,7 +145,7 @@ Example:
 wweb.search.update({ foo: 'bar' })
 ```
 
-<h1>wweb.search.clear()</h1>
+<h2>wweb.search.clear()</h2>
 Clears the search query
 
 Example:
@@ -152,7 +153,7 @@ Example:
 wweb.search.clear()
 ```
 
-<h1>wweb.cookie.get(name)</h1>
+<h2>wweb.cookie.get(name)</h2>
 Gets a cookie by name from the document or req.cookies in the server. Returns null if parameter not found
 
 Example:
@@ -160,7 +161,7 @@ Example:
 const foo = wweb.cookie.get('foo')
 ```
 
-<h1>wweb.cookie.getAll(name)</h1>
+<h2>wweb.cookie.getAll(name)</h2>
 Gets all cookie names and their values in the form of an object
 
 Example:
@@ -168,7 +169,7 @@ Example:
 const cookieObj = wweb.cookie.getAll()
 ```
 
-<h1>wweb.cookie.set(name, value, opts)</h1>
+<h2>wweb.cookie.set(name, value, opts)</h2>
 Adds or updates a cookie. [opts](https://www.npmjs.com/package/cookie#options)
 
 Example:
@@ -176,7 +177,7 @@ Example:
 wweb.cookie.set('foo', 'bar')
 ```
 
-<h1>wweb.cookie.update(obj)</h1>
+<h2>wweb.cookie.update(obj)</h2>
 Updates all cookies in document to represent obj. There is no support for options for this at the moment
 
 Example:
@@ -184,7 +185,7 @@ Example:
 wweb.cookie.update({ foo: 'bar' })
 ```
 
-<h1>wweb.cookie.clear()</h1>
+<h2>wweb.cookie.clear()</h2>
 Clears all cookies in document
 
 Example:
@@ -192,7 +193,7 @@ Example:
 wweb.cookie.clear()
 ```
 
-<h1>wweb.localStorage.get(name)</h1>
+<h2>wweb.localStorage.get(name)</h2>
 Gets an item by name in localStorage. Returns null if not found
 
 Example:
@@ -200,7 +201,7 @@ Example:
 const foo = wweb.localStorage.get('foo')
 ```
 
-<h1>wweb.localStorage.getAll(name)</h1>
+<h2>wweb.localStorage.getAll(name)</h2>
 Gets all items in localStorage in the form of an object
 
 Example:
@@ -208,7 +209,7 @@ Example:
 const store = wweb.localStorage.getAll()
 ```
 
-<h1>wweb.localStorage.set(name, value)</h1>
+<h2>wweb.localStorage.set(name, value)</h2>
 Adds or updates an item in localStorage
 
 Example:
@@ -216,7 +217,7 @@ Example:
 wweb.localStorage.set('foo', 'bar')
 ```
 
-<h1>wweb.localStorage.update(obj)</h1>
+<h2>wweb.localStorage.update(obj)</h2>
 Updates all items in localStorage to represent obj
 
 Example:
@@ -224,7 +225,7 @@ Example:
 wweb.localStorage.update({ foo: 'bar' })
 ```
 
-<h1>wweb.localStorage.clear()</h1>
+<h2>wweb.localStorage.clear()</h2>
 Clears all items in localStorage
 
 Example:
