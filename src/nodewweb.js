@@ -2,9 +2,9 @@ const genCache = () => {
   let store = {}
   return {
     get: name => store[name] || null,
-    getAll: () => ({ ...store }),
+    getAll: () => Object.assign({}, store),
     set: (name, val) => { store[name] = val },
-    update: (obj) => { store = { ...obj } },
+    update: (obj) => { store = Object.assign({}, obj) },
     remove: (name) => { delete store[name] },
     clear: () => { store = {} },
   }
