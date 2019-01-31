@@ -12,5 +12,20 @@
   "dependencies": {
     "cookie": "^0.3.1",
     "query-string": "^6.2.0"
-  }
+  },
+  "keywords": [
+    "search",
+    "query",
+    "cookie",
+    "window",
+    "document",
+    "location",
+    "localStorage",
+    "ssr",
+    "universal",
+    "isomorphic",
+    "web",
+    "api",
+    "webapp"
+  ]
 }
