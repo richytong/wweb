@@ -15,13 +15,13 @@ const cookie = genCache()
 const localStorage = genCache()
 
 const init = (config) => {
-  if (!config.query || typeof config.query !== 'object') {
-    throw new TypeError('config.query needs to be an object')
+  if (!config.search || typeof config.search !== 'object') {
+    throw new TypeError('config.search needs to be an object')
   }
   if (!config.cookie || typeof config.cookie !== 'object') {
     throw new TypeError('config.cookie needs to be an object')
   }
-  search.update(config.query)
+  search.update(config.search)
   cookie.update(config.cookie)
 }
 

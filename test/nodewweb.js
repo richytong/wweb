@@ -2,7 +2,7 @@ const assert = require('assert')
 const wweb = require('../src/nodewweb')
 
 const configFixture = {
-  query: {
+  search: {
     foo: 'bar',
     baz: 'qux',
   },
@@ -17,7 +17,7 @@ describe('nodewweb.init', () => {
     wweb.init(configFixture)
     const searchStore = wweb.search.getAll()
     const cookieStore = wweb.cookie.getAll()
-    assert.deepEqual(searchStore, configFixture.query)
+    assert.deepEqual(searchStore, configFixture.search)
     assert.deepEqual(cookieStore, configFixture.cookie)
     done()
   })
@@ -25,13 +25,13 @@ describe('nodewweb.init', () => {
 
 describe('nodewweb.*.<method>', () => {
   it('integration', (done) => {
-    wweb.search.update(configFixture.query)
-    assert.deepEqual(wweb.search.getAll(), configFixture.query)
+    wweb.search.update(configFixture.search)
+    assert.deepEqual(wweb.search.getAll(), configFixture.search)
     assert.strictEqual(wweb.search.get('foo'), 'bar')
     wweb.search.set('hey', 'ho')
     assert.strictEqual(wweb.search.get('hey'), 'ho')
     wweb.search.remove('hey')
-    assert.deepEqual(wweb.search.getAll(), configFixture.query)
+    assert.deepEqual(wweb.search.getAll(), configFixture.search)
     wweb.search.clear()
     assert.deepEqual(wweb.search.getAll(), {})
     done()
