@@ -1,6 +1,6 @@
 {
   "name": "wweb",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple, isomorphic interface around common Web APIs",
   "author": "Richard Tong",
   "license": "MIT",
