@@ -1,7 +1,7 @@
 # wweb
 Tired of using `window`? Don't know if you're in SERVER or BROWSER? Didn't know you needed a consistent api across common places you put stuff like the search query, cookies, or localStorage? Maybe try wweb
 
-wweb is a library designed for isomorphic webapps so that you can stop checking if `typeof window !== 'undefined'`. wweb is built around Web APIs that expose the same interfaces over `location.search`, `localStorage`, and `document.cookie` so you can forget about getters and setters and maybe even `window`. wweb assumes that your browser or your users' browsers have web APIs. Finally, wweb supports node all the way back to 4.9.1.
+wweb is a library designed for isomorphic webapps so that you can stop checking if `typeof window !== 'undefined'`. wweb is built around Web APIs that expose the same interfaces over `location.search`, `localStorage`, and `document.cookie` so you can forget about getters and setters and maybe even `window`. wweb assumes that your browser or your users' browsers have web APIs. Finally, wweb supports node all the way back to 6.4.0.
 
 # Installation
 ```bash
