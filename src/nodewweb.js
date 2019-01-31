@@ -14,7 +14,7 @@ const search = genCache()
 const cookie = genCache()
 const localStorage = genCache()
 
-const init = (config) => {
+const init = (config = {}) => {
   if (!config.search || typeof config.search !== 'object') {
     throw new TypeError('config.search needs to be an object')
   }
