@@ -15,8 +15,8 @@ const app = yourWebAppFrameworkHere()
 
 app.get('/*', (req, res) => {
   wweb.init({
-    query: req.query, // query object made from parsed query string
-    cookies: req.cookies, // cookies object made from parsed Cookies header <- you'll need middleware if you use express
+    search: req.query, // query object made from parsed query string
+    cookie: req.cookies, // cookies object made from parsed Cookies header <- you'll need middleware if you use express
   })
   // ...
 })
