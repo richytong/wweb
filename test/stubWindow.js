@@ -1,6 +1,12 @@
 const sinon = require('sinon')
 
+function Document() {}
+
 module.exports = (opts = {}) => {
+  Object.defineProperty(Document.prototype, 'cookie', {
+    get: () => opts.cookie || '',
+    set: sinon.spy(),
+  })
   global.window = {
     history: {
       pushState: sinon.spy(),
@@ -11,8 +17,13 @@ module.exports = (opts = {}) => {
       hash: opts.hash || '',
       search: opts.search || '',
     },
-    document: {
-      cookie: opts.cookie || '',
+    document: new Document(),
+    localStorage: {
+      setItem: sinon.spy(),
+      getItem: sinon.spy(),
+      removeItem: sinon.spy(),
+      clear: sinon.spy(),
     },
+    Document,
   }
 }

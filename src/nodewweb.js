@@ -12,6 +12,7 @@ const genCache = () => {
 
 const search = genCache()
 const cookie = genCache()
+const localStorage = genCache()
 
 const init = (config) => {
   if (typeof config.query !== 'object') {
@@ -20,8 +21,8 @@ const init = (config) => {
   if (typeof config.cookie !== 'object') {
     throw new TypeError('config.cookie needs to be an object')
   }
-  serverSearch.update(config.query)
-  serverCookie.update(config.cookie)
+  search.update(config.query)
+  cookie.update(config.cookie)
 }
 
 module.exports = {
@@ -29,4 +30,5 @@ module.exports = {
   redirect: () => {},
   search,
   cookie,
+  localStorage,
 }
