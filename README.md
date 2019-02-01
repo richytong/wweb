@@ -1,6 +1,4 @@
 # wweb
-Tired of using `window`? Don't know if you're in SERVER or BROWSER? Didn't know you needed a consistent api across common places you put stuff like the search query, cookies, or localStorage? Maybe try wweb
-
 wweb synchronizes cookies and search query params across the server and browser so you can stop writing environment conscious code and focus on building features. wweb exposes the same interfaces around Web APIs `location.search -> wweb.search`, `localStorage -> wweb.localStorage`, and `document.cookie -> wweb.cookie` so you can use them like they were key value stores. wweb assumes that your browser or your users' browsers have web APIs. Finally, wweb supports node all the way back to 6.4.0.
 
 # Installation
@@ -99,7 +97,7 @@ wweb.localStorage.remove('quux')
 console.log({ ...window.localStorage })
 // => { foo: 'bar' }
 
-wweb.lcoalStorage.clear()
+wweb.localStorage.clear()
 console.log({ ...window.localStorage })
 // => {}
 ```
