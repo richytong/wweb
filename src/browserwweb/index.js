@@ -8,7 +8,6 @@ const redirect = (url) => {
 }
 
 module.exports = {
-  init: () => {},
   redirect,
   search,
   cookie,

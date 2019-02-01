@@ -1,5 +1,5 @@
 # wweb
-wweb synchronizes cookies and search query params across the server and browser so you can stop writing environment conscious code and focus on building features. wweb exposes the same interfaces around Web APIs `location.search -> wweb.search`, `localStorage -> wweb.localStorage`, and `document.cookie -> wweb.cookie` so you can use them like they were key value stores. wweb assumes that your browser or your users' browsers have web APIs. Finally, wweb supports node all the way back to 6.4.0.
+wweb synchronizes Web APIs across the server and browser so you can stop writing environment conscious code and focus on building features. wweb exposes the same interfaces around Web APIs `location.search -> wweb.search`, `localStorage -> wweb.localStorage`, and `document.cookie -> wweb.cookie` so you can use them like they were key value stores. wweb assumes that your browser or your users' browsers have web APIs. Finally, wweb supports node all the way back to 6.4.0.
 
 # Installation
 ```bash
@@ -8,24 +8,6 @@ $ npm install wweb
 
 # Usage
 ```javascript
-/* server.js */
-const wweb = require('wweb')
-
-const app = yourWebAppFrameworkHere()
-
-app.get('/*', (req, res) => {
-  // you need to init wweb in your server.js file
-  // so it knows query params and cookies during SSR
-  wweb.init({
-    search: req.query, // query object made from parsed query string
-    cookie: req.cookies, // cookies object made from the Cookies header
-    // ^ express does not parse these automatically for you
-    //   so you need some middleware like cookie-parser
-  })
-  // ...
-})
-
-/* anywhere.jsx? */
 const wweb = require('wweb')
 
 wweb.redirect('https://myawesomewebsite.com')

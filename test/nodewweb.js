@@ -12,17 +12,6 @@ const configFixture = {
   },
 }
 
-describe('nodewweb.init', () => {
-  it('updates nodewweb.search and nodewweb.cookie with config', (done) => {
-    wweb.init(configFixture)
-    const searchStore = wweb.search.getAll()
-    const cookieStore = wweb.cookie.getAll()
-    assert.deepEqual(searchStore, configFixture.search)
-    assert.deepEqual(cookieStore, configFixture.cookie)
-    done()
-  })
-})
-
 describe('nodewweb.*.<method>', () => {
   it('integration', (done) => {
     wweb.search.update(configFixture.search)
