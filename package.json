@@ -1,7 +1,7 @@
 {
   "name": "wweb",
   "version": "1.0.6",
-  "description": "Simple, isomorphic interface around common Web APIs",
+  "description": "Web APIs -> environment-agnostic key value stores and more!",
   "author": "Richard Tong",
   "license": "MIT",
   "main": "./src/index.js",
