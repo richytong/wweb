@@ -5,6 +5,9 @@
   "author": "Richard Tong",
   "license": "MIT",
   "main": "./src/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
   "repository": {
     "type": "git",
     "url": "github:richytong/wweb"
@@ -25,5 +28,9 @@
     "ssr",
     "universal",
     "isomorphic"
-  ]
+  ],
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.3"
+  }
 }
