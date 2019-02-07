@@ -1,6 +1,6 @@
 {
   "name": "wweb",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Web APIs -> environment-agnostic key value stores and more!",
   "author": "Richard Tong",
   "license": "MIT",
