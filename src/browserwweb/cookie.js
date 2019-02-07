@@ -2,44 +2,27 @@ const cookie = require('cookie')
 
 const isDef = v => typeof v !== 'undefined' && v !== null
 
-// acts like window.document.cookie,
-// in fact we're referencing the implementation directly
-// do yourself a favor and never use getters/setters
-const _cookieGetter = () => (
-  Object
-    .getOwnPropertyDescriptor(window.Document.prototype, 'cookie')
-    .get.bind(window.document)
-)()
-
-// acts like window.document.cookie = 'foo=bar'
-// also references the direct implementation
-const _cookieSetter = fmtCookie => (
-  Object
-    .getOwnPropertyDescriptor(window.Document.prototype, 'cookie')
-    .set.bind(window.document)
-)(fmtCookie)
-
 const _setCookie = (name, value, opts) => {
   const serialCookie = cookie.serialize(name, value, opts)
-  _cookieSetter(serialCookie)
+  window.document.cookie = serialCookie
 }
 
 const _removeCookie = (name) => {
   const cookieOpts = { expires: new Date(Date.now() - 86400000) }
   const serialCookie = cookie.serialize(name, '', cookieOpts)
-  _cookieSetter(serialCookie)
+  window.document.cookie = serialCookie
 }
 
 const get = (name) => {
   if (!name) return null
   if (!window.document.cookie) return null
-  const cookieObj = cookie.parse(_cookieGetter())
+  const cookieObj = cookie.parse(window.document.cookie)
   return cookieObj[name] || null
 }
 
 const getAll = () => {
   if (!window.document.cookie) return {}
-  return cookie.parse(_cookieGetter())
+  return cookie.parse(window.document.cookie)
 }
 
 const set = (name, value, opts) => {
