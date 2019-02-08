@@ -7,7 +7,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint src"
+    "lint": "eslint **/*.js"
   },
   "repository": {
     "type": "git",
