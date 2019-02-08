@@ -7,7 +7,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "eslint **/*.js"
+    "lint": "eslint **/*.js --ignore-pattern node_modules/"
   },
   "repository": {
     "type": "git",
