@@ -12,6 +12,13 @@ const configFixture = {
   },
 }
 
+describe('badtest', () => {
+  it('is bad', (done) => {
+    throw new Error('bad')
+    done()
+  })
+})
+
 describe('nodewweb.*.<method>', () => {
   it('integration', (done) => {
     wweb.search.update(configFixture.search)
