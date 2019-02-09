@@ -31,7 +31,7 @@ wweb.search.set('baz', 'qux')
 console.log(window.location.search)
 // => '?foo=bar&baz=qux'
 
-wweb.search.update('quux', 'quuz')
+wweb.search.update({ quux: 'quuz' })
 console.log(window.location.search)
 // => '?quux=quuz'
 
@@ -56,7 +56,7 @@ wweb.cookies.set('foo', 'bar')
 console.log(window.document.cookie)
 // => 'foo=bar; baz=qux'
 
-wweb.cookies.update('quux', 'quuz')
+wweb.cookies.update({ quux: 'quuz' })
 console.log(window.document.cookie)
 // => 'quux=quuz'
 
