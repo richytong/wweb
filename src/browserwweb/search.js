@@ -1,4 +1,4 @@
-const queryString = require('query-string')
+const queryString = require('../query-string-arr')
 const genRelUrl = require('./genRelUrl')
 
 const isDef = v => typeof v !== 'undefined' && v !== null
@@ -23,9 +23,9 @@ const getAll = () => {
 
 const set = (name, value) => {
   if (!name || !isDef(value)) return
-  const searchObj = queryString.parse(window.location.search)
-  searchObj[name] = value
-  _updateQueryString(searchObj)
+  const searchArr= queryString.parse(window.location.search, { array: true })
+  searchArr.push([name, value])
+  _updateQueryString(searchArr)
 }
 
 const update = (searchObj) => {
@@ -36,9 +36,13 @@ const update = (searchObj) => {
 const remove = (name) => {
   if (!name) return
   if (!window.location.search) return
-  const searchObj = queryString.parse(window.location.search)
-  delete searchObj[name]
-  _updateQueryString(searchObj)
+  const searchArr = queryString.parse(window.location.search, { array: true })
+  for (let i = 0; i < searchArr.length; i++) {
+    if (searchArr[i][0] == name) {
+      searchArr.splice(i,1)
+    }
+  }
+  _updateQueryString(searchArr)
 }
 
 const clear = () => {
