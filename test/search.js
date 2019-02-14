@@ -10,6 +10,8 @@ const fixtureSearchArr = [['waldo', 'fred'], ['foo', 'bar'], ['baz', 'qux']]
 const fixtureCookie = 'foo=bar; baz=qux;'
 const fixtureCookieObj = { foo: 'bar', baz: 'qux' }
 
+const queryString = require('../src/query-string-arr')
+
 afterEach((done) => {
   global.window = undefined
   done()
@@ -160,7 +162,7 @@ describe('browserwweb.search.set order', () => {
     wweb.search.set('aaa', 'bbb')
     const { args } = window.history.pushState.lastCall
     const arr = args[0].search
-
+    console.log(queryString.stringify(arr))
     assert.deepEqual(arr, [ ...fixtureSearchArr, ['aaa', 'bbb']])
     done()
   })
@@ -174,6 +176,7 @@ describe('browserwweb.search.remove order', () => {
     const { args } = window.history.pushState.lastCall
     const rest = [['waldo','fred'],['baz', 'qux']]
     const arr = args[0].search
+    console.log(queryString.stringify(arr))
     assert.deepEqual(arr, rest)
     done()
   })
