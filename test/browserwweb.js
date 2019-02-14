@@ -2,8 +2,6 @@ const assert = require('assert')
 const wweb = require('../src/browserwweb')
 const stubWindow = require('./stubWindow')
 
-const fixtureQS = '?foo=bar&baz=qux'
-const fixtureSearchObj = { foo: 'bar', baz: 'qux' }
 const fixtureCookie = 'foo=bar; baz=qux;'
 const fixtureCookieObj = { foo: 'bar', baz: 'qux' }
 
