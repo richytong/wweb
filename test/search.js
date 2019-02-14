@@ -4,7 +4,9 @@ const stubWindow = require('./stubWindow')
 const arrToObj = require('./arrToObj')
 
 const fixtureQS = '?foo=bar&baz=qux'
+const fixtureQSArr= '?waldo=fred&foo=bar&baz=qux'
 const fixtureSearchObj = { foo: 'bar', baz: 'qux' }
+const fixtureSearchArr = [['waldo', 'fred'], ['foo', 'bar'], ['baz', 'qux']]
 const fixtureCookie = 'foo=bar; baz=qux;'
 const fixtureCookieObj = { foo: 'bar', baz: 'qux' }
 
@@ -147,6 +149,32 @@ describe('browserwweb.search.clear', () => {
     stubWindow()
     wweb.search.clear()
     assert(window.history.pushState.notCalled)
+    done()
+  })
+})
+
+
+describe('browserwweb.search.set order', () => {
+  it('adds a query parameter to the query string', (done) => {
+    stubWindow({ search: fixtureQSArr })
+    wweb.search.set('aaa', 'bbb')
+    const { args } = window.history.pushState.lastCall
+    const arr = args[0].search
+
+    assert.deepEqual(arr, [ ...fixtureSearchArr, ['aaa', 'bbb']])
+    done()
+  })
+
+})
+
+describe('browserwweb.search.remove order', () => {
+  it('removes a query parameter from the query string', (done) => {
+    stubWindow({ search: fixtureQSArr })
+    wweb.search.remove('foo')
+    const { args } = window.history.pushState.lastCall
+    const rest = [['waldo','fred'],['baz', 'qux']]
+    const arr = args[0].search
+    assert.deepEqual(arr, rest)
     done()
   })
 })
