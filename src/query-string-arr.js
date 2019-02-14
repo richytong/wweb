@@ -92,7 +92,7 @@ function parse(input, type) {
   if (type !== undefined && type.array) {
     const arr = []
     for (key of keyOrder) {
-      arr.push([key, ret[key]])
+      arr.push([key, obj[key]])
     }
     return arr
   }
