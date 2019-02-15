@@ -3,18 +3,16 @@ const decodeComponent = require('decode-uri-component')
 
 // code heavily borrowed from https://github.com/sindresorhus/query-string
 
-function parserForArrayFormat() {
-  return (key, value, accumulator) => {
-    if (accumulator[key] === undefined) {
-      accumulator[key] = value
-      return
-    }
-
-    accumulator[key] = [].concat(accumulator[key], value)
+const parserForArrayFormat = () => (key, value, accumulator) => {
+  if (accumulator[key] === undefined) {
+    accumulator[key] = value
+    return
   }
+
+  accumulator[key] = [].concat(accumulator[key], value)
 }
 
-function encode(value, options) {
+const encode = (value, options) => {
   if (options.encode) {
     return options.strict ? strictUriEncode(value) : encodeURIComponent(value)
   }
@@ -22,7 +20,7 @@ function encode(value, options) {
   return value
 }
 
-function decode(value, options) {
+const decode = (value, options) => {
   if (options.decode) {
     return decodeComponent(value)
   }
@@ -30,7 +28,7 @@ function decode(value, options) {
   return value
 }
 
-function keysSorter(input) {
+const keysSorter = (input) => {
   if (Array.isArray(input)) {
     return input.sort()
   }
@@ -44,10 +42,10 @@ function keysSorter(input) {
   return input
 }
 
-function parse(input, type) {
+const parse = (input, type) => {
   const options = Object.assign({ decode: true, arrayFormat: 'none' })
 
-  const formatter = parserForArrayFormat(options)
+  const formatter = parserForArrayFormat()
 
   const ret = {}
   if (typeof input !== 'string') {
@@ -102,41 +100,38 @@ function parse(input, type) {
 
 exports.parse = parse
 
-function encoderForArrayFormat(options) {
-  return (key, value) => (value === null ? encode(key, options) : [
+const encoderForArrayFormat = options => (key, value) => (value === null
+  ? encode(key, options) : [
     encode(key, options),
     '=',
     encode(value, options),
   ].join(''))
-}
 
-function stringifyHelper(arr, isArray, formatter, options, obj) {
-  return arr.map((val) => {
-    const value = isArray ? val[1] : obj[val]
-    const key = isArray ? val[0] : val
+const stringifyHelper = (arr, isArray, formatter, options, obj) => arr.map((val) => {
+  const value = isArray ? val[1] : obj[val]
+  const key = isArray ? val[0] : val
 
-    if (value === undefined) {
-      return ''
-    }
+  if (value === undefined) {
+    return ''
+  }
 
-    if (value === null) {
-      return encode(key, options)
-    }
+  if (value === null) {
+    return encode(key, options)
+  }
 
-    if (Array.isArray(value)) {
-      const result = []
+  if (Array.isArray(value)) {
+    const result = []
 
-      for (const value2 of value.slice()) {
-        if (value2 !== undefined) {
-          result.push(formatter(key, value2))
-        }
+    for (const value2 of value.slice()) {
+      if (value2 !== undefined) {
+        result.push(formatter(key, value2))
       }
-      return result.join('&')
     }
+    return result.join('&')
+  }
 
-    return `${encode(key, options)}=${encode(value, options)}`
-  }).filter(x => x.length > 0).join('&')
-}
+  return `${encode(key, options)}=${encode(value, options)}`
+}).filter(x => x.length > 0).join('&')
 
 exports.stringify = (obj, options) => {
   if (!obj) {

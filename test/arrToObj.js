@@ -1,8 +1,8 @@
 function arrToObj(arr) {
   const obj = {}
-  for (each of arr) {
+  arr.forEach((each) => {
     obj[each[0]] = each[1]
-  }
+  })
   return obj
 }
 
